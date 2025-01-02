@@ -21,11 +21,7 @@
  *    getIntervalArray(3, 3) => [ 3 ]
  */
 function getIntervalArray(start, end) {
-  const arr = [];
-  for (let i = start; i <= end; i += 1) {
-    arr.push(i);
-  }
-  return arr;
+  return Array.from({ length: end - start + 1 }, (_, index) => start + index);
 }
 /**
  * Returns a new array where each element is the sum of the corresponding elements
@@ -273,14 +269,12 @@ function distinct(arr) {
  *    createNDimensionalArray(1, 1) => [0]
  */
 function createNDimensionalArray(n, size) {
-  if (n === 1) return 0;
-
-  const createLayer = (depth) => {
-    if (depth === 1) return Array(size).fill(0);
-    return Array(size)
-      .fill(null)
-      .map(() => createLayer(depth - 1));
-  };
+  const createLayer = (depth) =>
+    depth === 1
+      ? Array(size).fill(0)
+      : Array(size)
+          .fill(null)
+          .map(() => createLayer(depth - 1));
 
   return createLayer(n);
 }
@@ -387,8 +381,7 @@ function generateOdds(len) {
  *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
  */
 function getElementByIndices(arr, indices) {
-  const result = indices.reduce((acc, value) => acc[value], arr);
-  return result;
+  return indices.reduce((acc, value) => acc[value], arr);
 }
 
 /**
@@ -495,8 +488,7 @@ function getHexRGBValues(arr) {
  *   getMaxItems([ 10, 10, 10, 10 ], 3) => [ 10, 10, 10 ]
  */
 function getMaxItems(arr, n) {
-  const result = arr.sort((a, b) => b - a).splice(0, n);
-  return result;
+  return arr.sort((a, b) => b - a).splice(0, n);
 }
 
 /**
